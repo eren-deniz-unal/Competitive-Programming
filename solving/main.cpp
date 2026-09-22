@@ -3,6 +3,8 @@ using namespace std;
 
 #define ll long long
 #define endl '\n'
+#define LLMAX LONG_LONG_MAX
+#define LLMIN LONG_LONG_MIN
 
 void solve(){
 }
