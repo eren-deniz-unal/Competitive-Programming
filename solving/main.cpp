@@ -5,6 +5,7 @@ using namespace std;
 #define endl '\n'
 #define LLMAX LONG_LONG_MAX
 #define LLMIN LONG_LONG_MIN
+const ll mod = (1e9) + 7;
 
 void solve(){
 }
