@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define endl '\n'
+#define LLMAX LONG_LONG_MAX
+#define LLMIN LONG_LONG_MIN
+const ll mod = (1e9) + 7;
+
+void solve(){
+    //took like 2.5 ish hours
+    ll n;
+    cin>>n;
+    ll arr[n + 1];
+    ll oneCount = 0, twoCount = 0, threeCount = 0;
+    
+    for(int i = 1 ; i <= n ; i++){
+        cin>>arr[i];
+        if(arr[i] == 1) oneCount++;
+        if(arr[i] == 2) twoCount++;
+        if(arr[i] == 3) threeCount++;
+    }
+    double dpNew[n + 1][n + 1]; // dp[i][j][k] => i -> 1 count, j -> 2 count, k -> 3 count
+    double dpOld[n + 1][n + 1]; // dp[i][j][k] => i -> 1 count, j -> 2 count, k -> 3 count
+    dpOld[0][0] = 0;
+
+    for(int k = 0 ; k <= threeCount ; k++){
+        for(int j = 0 ; j <= n ; j++){
+            for(int i = 0 ; i <= n ; i++){
+                if(i == 0 && j == 0 && k == 0) continue;
+                dpNew[i][j] = (i != 0 ? dpNew[i - 1][j] * i : 0);
+                dpNew[i][j] += (j != 0 ? dpNew[i + 1][j - 1] * j : 0);
+                dpNew[i][j] += (k != 0 ? dpOld[i][j + 1] * k : 0);
+                dpNew[i][j] /= double(i + j + k);
+                dpNew[i][j] += (double(n) / double(i + j + k));
+            }
+        }
+        for(int j = 0 ; j <= n ; j++){
+            for(int i = 0 ; i <= n ; i++){
+                dpOld[i][j] = dpNew[i][j];
+            }
+        }
+    }
+
+    cout<<dpNew[oneCount][twoCount];
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout<<setprecision(numeric_limits<double>::max_digits10);
+
+    solve();
+
+    return 0;
+}
