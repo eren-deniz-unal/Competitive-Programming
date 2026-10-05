@@ -13,13 +13,10 @@ void solve(){
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    cout<<setprecision(numeric_limits<double>::max_digits10); // set cout to print up to 10 digits of precision
+    cout<<fixed<<setprecision(10); // set cout to print up to 10 digits of precision
+    ll testCaseCount = 1;
+    //cin>>testCaseCount; //for test cases
 
-    ll testCaseCount;
-    cin>>testCaseCount;
-
-    while(testCaseCount--){
-        solve();
-    }
+    while(testCaseCount--) solve();
     return 0;
 }
