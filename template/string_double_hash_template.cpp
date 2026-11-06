@@ -7,9 +7,13 @@ using namespace std;
 #define LLMIN LONG_LONG_MIN
 const ll mod = (1e9) + 7;
 
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+ll rngNum(ll l, ll r){ return uniform_int_distribution<ll>(l, r)(rng); }
+ll rngOddNum(ll l, ll r){ ll val = uniform_int_distribution<ll>(l, r)(rng); if(val%2 == 0) val++; if(val > r) val = l + (l%2 == 0); return val; }
+
 struct doubleHash{
     static inline ll mod1 = 1000000007, mod2 = mod1+2;
-    static inline ll base1 = 31, base2 = 223;
+    static inline ll base1 = rngOddNum(131, mod1 - 10), base2 = rngOddNum(131, mod2 - 10);
     static inline vector<ll> pows1, pows2;
 
     static void initialize(ll hashN){
@@ -34,7 +38,7 @@ struct doubleHash{
 
     pair<ll, ll> get(ll l, ll r) const{
         ll rangeSize = r - l + 1;
-        if(l < 0 || r >= preHash1.size() || l > r) return{-1, -1};
+        if(l < 0 || r >= preHash1.size()-1 || l > r) return{-1, -1};
         ll hash1 = ((preHash1[r+1] - preHash1[l] * pows1[rangeSize]) % mod1 + mod1) % mod1;
         ll hash2 = ((preHash2[r+1] - preHash2[l] * pows2[rangeSize]) % mod2 + mod2) % mod2;
         return {hash1, hash2};
