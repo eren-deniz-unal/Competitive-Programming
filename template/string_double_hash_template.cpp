@@ -34,7 +34,7 @@ struct doubleHash{
 
     pair<ll, ll> get(ll l, ll r) const{
         ll rangeSize = r - l + 1;
-        if(l < 0 || r >= preHash1.size()) return{-1, -1};
+        if(l < 0 || r >= preHash1.size() || l > r) return{-1, -1};
         ll hash1 = ((preHash1[r+1] - preHash1[l] * pows1[rangeSize]) % mod1 + mod1) % mod1;
         ll hash2 = ((preHash2[r+1] - preHash2[l] * pows2[rangeSize]) % mod2 + mod2) % mod2;
         return {hash1, hash2};
