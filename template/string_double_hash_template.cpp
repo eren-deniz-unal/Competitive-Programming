@@ -52,6 +52,12 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout<<fixed<<setprecision(10); // set cout to print up to 10 digits of precision
+
+    if(fopen("walk.in", "r")){
+        freopen("walk.in", "r", stdin);
+        freopen("walk.out", "w", stdout);
+    } //for usaco site
+
     ll testCaseCount = 1;
     //cin>>testCaseCount; //for test cases
 
